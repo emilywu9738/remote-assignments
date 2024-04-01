@@ -15,6 +15,15 @@ function toNumber(input) {
     let result = [];
     for (let i of input) {
         result.push(alphabet.indexOf(i) + 1)
-    };
+    }
+    return result;
+}
+
+// 第二題with unicode
+function toNumber(input) {
+    let result = [];
+    for (let i of input) {
+        result.push(i.charCodeAt() - 96)
+    }
     return result;
 }
