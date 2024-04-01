@@ -75,7 +75,6 @@ h2 {
 
 .row {
     flex-wrap: wrap;
-    max-width: 2000px;
 }
 
 .col {
@@ -120,4 +119,9 @@ button:hover {
     }
 }
 
-@media(min-width:1200px) {}
+@media(min-width:1200px) {
+    .row {
+        width: 1200px;
+        margin: 0 auto 20px auto;
+    }
+}
