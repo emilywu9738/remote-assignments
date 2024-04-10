@@ -5,14 +5,6 @@ const cookieParser = require('cookie-parser');
 app.use(express.static('public'));
 app.use(cookieParser());
 
-
-
-// app.get('/cookie', (req, res) => {
-//     res.cookie('userName', 'Tim', { maxAge: 900000 });
-//     console.log(req.cookies);
-//     res.send('Check the console for cookies!');
-// })
-
 app.get('/data', (req, res) => {
     // const number = Number(req.query.number);
     const { number } = req.query;
@@ -47,7 +39,6 @@ app.get('/myName', (req, res) => {
 app.get('/trackName', (req, res) => {
     const { name } = req.query;
     res.cookie('userName', name);
-    console.log(req.cookies)
     res.redirect('/myName');
 })
 
