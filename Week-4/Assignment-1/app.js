@@ -3,6 +3,11 @@ function delayedResult(n1, n2, delayTime, callback) {
   setTimeout(() => callback(n1 + n2), delayTime);
 }
 
-delayedResult(-5, 10, 2000, function (result) {
-  console.log(result);
-});
+// B. To implement delayed Result again using promise this time.It should look like:
+function delayedResultPromise(n1, n2, delayTime) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(n1 + n2);
+    }, delayTime);
+  });
+}
