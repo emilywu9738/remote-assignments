@@ -11,3 +11,15 @@ const pool = mysql
     database: process.env.MYSQL_DATABASE,
   })
   .promise();
+
+async function createUser(email, password) {
+  const result = await pool.query(
+    `
+    INSERT INTO user (email, password)
+    VALUES(?, ?)
+    `,
+    [email, password]
+  );
+}
+
+module.exports = createUser;
