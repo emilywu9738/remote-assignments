@@ -22,4 +22,14 @@ async function createUser(email, password) {
   );
 }
 
-module.exports = createUser;
+async function userLogin(email, password) {
+  const [result] = await pool.query(
+    `
+    SELECT * FROM user WHERE email = ? AND password = ?
+    `,
+    [email, password]
+  );
+  return result;
+}
+
+module.exports = { createUser, userLogin };
