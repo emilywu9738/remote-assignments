@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-const { createUser, userLogin } = require('./database.js');
+const { createUser, userLogin, checkUser } = require('./database.js');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -15,7 +15,14 @@ app.get('/register', (req, res) => {
 
 app.post('/register', async (req, res) => {
   const { email, password } = req.body;
-  await createUser(email, password);
+  const existUser = await checkUser(email, password);
+  if (existUser.length > 0) {
+    const errorMessage = 'Error!!! User already exists!';
+    res.render('register', { errorMessage });
+  } else {
+    await createUser(email, password);
+    res.redirect('/home');
+  }
 });
 
 app.get('/login', async (req, res) => {
@@ -34,7 +41,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.render('home');
+  res.render('index');
 });
 
 app.listen(3000, () => console.log('Listening to port 3000!'));

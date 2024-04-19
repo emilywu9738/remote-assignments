@@ -12,6 +12,16 @@ const pool = mysql
   })
   .promise();
 
+async function checkUser(email, password) {
+  const [result] = await pool.query(
+    `
+    SELECT * FROM user WHERE email = ?
+    `,
+    [email, password]
+  );
+  return result;
+}
+
 async function createUser(email, password) {
   const result = await pool.query(
     `
@@ -32,4 +42,4 @@ async function userLogin(email, password) {
   return result;
 }
 
-module.exports = { createUser, userLogin };
+module.exports = { createUser, userLogin, checkUser };
