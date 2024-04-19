@@ -9,8 +9,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/register', (req, res) => {
-  res.render('register');
+app.get('/home', (req, res) => {
+  res.render('home');
 });
 
 app.post('/register', async (req, res) => {
@@ -18,30 +18,30 @@ app.post('/register', async (req, res) => {
   const existUser = await checkUser(email, password);
   if (existUser.length > 0) {
     const errorMessage = 'Error!!! User already exists!';
-    res.render('register', { errorMessage });
+    res.render('home', { errorMessage });
   } else {
     await createUser(email, password);
-    res.redirect('/home');
+    res.redirect('/member');
   }
 });
 
-app.get('/login', async (req, res) => {
-  res.render('login');
+app.get('/home', (req, res) => {
+  res.render('home');
 });
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const result = await userLogin(email, password);
   if (result.length > 0) {
-    res.redirect('/home');
+    res.redirect('/member');
   } else {
-    const errorMessage = 'Error!!! Please try again!';
-    res.render('login', { errorMessage });
+    const errorMessage = 'Login Failed! Please try again!';
+    res.render('home', { errorMessage });
   }
 });
 
-app.get('/home', (req, res) => {
-  res.render('index');
+app.get('/member', (req, res) => {
+  res.render('member');
 });
 
 app.listen(3000, () => console.log('Listening to port 3000!'));

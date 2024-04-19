@@ -1,7 +1,18 @@
 if errorMessage
     h1=errorMessage
+
 h1 Register
 form(action='/register' method='POST')
+  div
+    label(for='email') Email: 
+    input#email(type='email' name='email')
+  div
+    label(for='password') Password: 
+    input#password(type='password' name='password')
+  button submit
+
+h1 Login
+form(action='/login' method='POST')
   div
     label(for='email') Email: 
     input#email(type='email' name='email')
