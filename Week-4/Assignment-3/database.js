@@ -32,7 +32,7 @@ async function createUser(email, password) {
   );
 }
 
-async function userLogin(email, password) {
+async function loginUser(email, password) {
   const [result] = await pool.query(
     `
     SELECT * FROM user WHERE email = ? AND password = ?
@@ -42,4 +42,4 @@ async function userLogin(email, password) {
   return result;
 }
 
-module.exports = { createUser, userLogin, checkUser };
+module.exports = { createUser, loginUser, checkUser };

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-const { createUser, userLogin, checkUser } = require('./database.js');
+const { createUser, loginUser, checkUser } = require('./database.js');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +31,7 @@ app.get('/home', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  const result = await userLogin(email, password);
+  const result = await loginUser(email, password);
   if (result.length > 0) {
     res.redirect('/member');
   } else {
